@@ -1,15 +1,13 @@
 // src/pages/Home.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import EventCalendar from '../components/EventCalendar';
 import { FaCalendarAlt } from 'react-icons/fa';
-import cricketBackground from './asd-transformed.png'; // Adjust the path as necessary
 import './Home.css'; // Import your CSS file for custom styles
 
 const Home = () => {
-    // State to track selected event details
+    // State to track hovered event details
     const [hoveredEvent, setHoveredEvent] = useState(null);
-    const [sidebarHovered, setSidebarHovered] = useState(false); // Track if sidebar is hovered
+    const [sidebarVisible, setSidebarVisible] = useState(false);
 
     // Mock events for the calendar
     const events = [
@@ -20,69 +18,74 @@ const Home = () => {
 
     return (
         <div className="home-container">
-            {/* Sidebar for Calendar */}
+            {/* Floating Icon for Sidebar */}
             <div
-                className={`sidebar ${sidebarHovered ? 'expanded' : 'collapsed'}`}
-                onMouseEnter={() => setSidebarHovered(true)}
-                onMouseLeave={() => setSidebarHovered(false)}
+                className="floating-icon"
+                onMouseEnter={() => setSidebarVisible(true)}
+                onMouseLeave={() => setSidebarVisible(false)}
             >
-                <FaCalendarAlt className="sidebar-icon" />
-                {sidebarHovered && (
-                    <div className="sidebar-content">
-                        <h2 className="text-3xl font-bold mb-4 flex items-center">
-                            <FaCalendarAlt className="mr-2" /> Event Calendar
-                        </h2>
-                        <div className="mt-6">
-                            {events.map(event => (
-                                <div
-                                    key={event.id}
-                                    onMouseEnter={() => setHoveredEvent(event)}
-                                    onMouseLeave={() => setHoveredEvent(null)}
-                                    className="event-item"
-                                >
-                                    <h3 className="text-xl font-semibold">{event.title}</h3>
-                                    <p className="text-sm">{event.date}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )}
+                <FaCalendarAlt size={30} />
             </div>
+
+            {/* Sidebar showing on hover */}
+            {sidebarVisible && (
+                <div
+                    className="hover-sidebar"
+                    onMouseEnter={() => setSidebarVisible(true)}
+                    onMouseLeave={() => setSidebarVisible(false)}
+                >
+                    <h2 className="text-xl font-bold mb-4">Events</h2>
+                    <div>
+                        {events.map(event => (
+                            <div
+                                key={event.id}
+                                onMouseEnter={() => setHoveredEvent(event)}
+                                onMouseLeave={() => setHoveredEvent(null)}
+                                className="event-item"
+                            >
+                                <h3 className="text-md font-semibold">{event.title}</h3>
+                                <p className="text-sm">{event.date}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {/* Event Details Popup */}
+            {hoveredEvent && (
+                <div
+                    className="hover-popup"
+                    onMouseEnter={() => setHoveredEvent(hoveredEvent)}
+                    onMouseLeave={() => setHoveredEvent(null)}
+                >
+                    <img src={hoveredEvent.image} alt={hoveredEvent.title} className="w-full h-24 object-cover rounded-lg mb-2" />
+                    <h3 className="text-md font-semibold">{hoveredEvent.title}</h3>
+                    <p>Date: {hoveredEvent.date}</p>
+                    <p>Location: {hoveredEvent.location}</p>
+                    <p>Prize: {hoveredEvent.prize}</p>
+                    <div className="mt-2">
+                        <Link to={`/register/${hoveredEvent.id}?role=player`} className="mr-2 bg-green-500 text-white px-2 py-1 rounded-md inline-block hover:bg-green-600">Player</Link>
+                        <Link to={`/register/${hoveredEvent.id}?role=coach`} className="bg-blue-500 text-white px-2 py-1 rounded-md inline-block hover:bg-blue-600">Coach</Link>
+                    </div>
+                </div>
+            )}
 
             {/* Main Content */}
             <div className="main-content">
-                {/* Hero Section */}
                 <div className="hero-section">
                     <div className="overlay">
                         <div className="relative z-10 text-white text-center py-32">
                             <h1 className="text-5xl font-bold">Welcome to XYZ Cricket Tournaments</h1>
                             <p className="mt-4 text-lg">Join us for exciting cricket matches and tournaments!</p>
-                            <Link to="/register" className="mt-6 inline-block bg-yellow-500 text-black px-6 py-2 rounded-md hover:bg-yellow-600 transition-colors duration-300">Register Now</Link>
+                            <Link to="/register" className="mt-6 inline-block bg-yellow-500 text-black px-6 py-2 rounded-md hover:bg-yellow-600 transition-colors">Register Now</Link>
                         </div>
                     </div>
                 </div>
-
-                {/* Event Details Popup */}
-                {hoveredEvent && (
-                    <div className="fixed bottom-8 right-8 p-6 bg-white shadow-lg rounded-lg z-50 transition-all duration-300 transform translate-y-0">
-                        <img src={hoveredEvent.image} alt={hoveredEvent.title} className="w-full h-48 object-cover rounded-lg mb-4" />
-                        <h3 className="text-2xl font-semibold">{hoveredEvent.title}</h3>
-                        <p className="mt-2">Date: {hoveredEvent.date}</p>
-                        <p>Location: {hoveredEvent.location}</p>
-                        <p>Prize Money: {hoveredEvent.prize}</p>
-                        <p>{hoveredEvent.description}</p>
-                        <div className="mt-4">
-                            <Link to={`/register/${hoveredEvent.id}?role=player`} className="mr-2 bg-green-500 text-white px-4 py-2 rounded-md inline-block hover:bg-green-600 transition-colors duration-300">Register as Player</Link>
-                            <Link to={`/register/${hoveredEvent.id}?role=coach`} className="bg-blue-500 text-white px-4 py-2 rounded-md inline-block hover:bg-blue-600 transition-colors duration-300">Register as Coach</Link>
-                        </div>
-                    </div>
-                )}
 
                 {/* Upcoming Tournaments Section */}
                 <div className="py-12 bg-gray-100">
                     <h2 className="text-3xl font-bold text-center">Upcoming Tournaments</h2>
                     <div className="flex flex-wrap justify-center mt-8">
-                        {/* Tournament Cards */}
                         {events.map(event => (
                             <div key={event.id} className="bg-white shadow-lg rounded-lg p-6 mx-4 my-4 max-w-xs">
                                 <img src={event.image} alt={event.title} className="w-full h-48 object-cover rounded-lg mb-4" />
@@ -90,19 +93,12 @@ const Home = () => {
                                 <p className="mt-2">Date: {event.date}</p>
                                 <p>Location: {event.location}</p>
                                 <p>Prize: {event.prize}</p>
-                                <Link to={`/event/${event.id}`} className="mt-4 bg-green-500 text-white px-4 py-2 rounded-md block text-center hover:bg-green-600 transition-colors duration-300">View Details</Link>
+                                <Link to={`/event/${event.id}`} className="mt-4 bg-green-500 text-white px-4 py-2 rounded-md block text-center hover:bg-green-600">View Details</Link>
                             </div>
                         ))}
                     </div>
                 </div>
             </div>
-
-            {/* Footer */}
-            <footer className="bg-gray-800 text-white py-4 text-center">
-                <p>&copy; 2024 XYZ Cricket Tournaments. All rights reserved.</p>
-                <Link to="/terms" className="text-gray-400 hover:underline">Terms & Conditions</Link>
-                <Link to="/privacy" className="ml-4 text-gray-400 hover:underline">Privacy Policy</Link>
-            </footer>
         </div>
     );
 };

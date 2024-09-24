@@ -1,60 +1,68 @@
+/* Home.css */
 .home-container {
     display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-}
-
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 60px;
-    /* Collapsed width */
-    background-color: #333;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: width 0.3s ease;
-}
-
-.sidebar.expanded {
-    width: 300px;
-    /* Expanded width */
-}
-
-.sidebar .sidebar-icon {
-    font-size: 2rem;
-}
-
-.sidebar-content {
-    padding: 20px;
-}
-
-.event-item {
-    padding: 10px 0;
-    cursor: pointer;
-}
-
-.main-content {
-    margin-left: 60px;
-    flex-grow: 1;
-    padding: 20px;
-}
-
-.hero-section {
-    background: url('./asd-transformed.png') no-repeat center center;
-    background-size: cover;
-    height: 400px;
+    justify-content: space-between;
     position: relative;
 }
 
-.hero-section .overlay {
-    background-color: rgba(0, 0, 0, 0.5);
-    height: 100%;
+.floating-icon {
+    position: fixed;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000;
 }
 
-footer {
-    margin-top: auto;
+.hover-sidebar {
+    position: fixed;
+    left: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: white;
+    width: 200px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 1001;
+}
+
+.event-item {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.hover-popup {
+    position: fixed;
+    left: 280px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: white;
+    width: 220px;
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 1002;
+}
+
+.main-content {
+    flex: 1;
+    margin-left: 100px;
+    /* Leave space for the floating icon */
+}
+
+.hero-section {
+    background-image: url('/path-to-your-image');
+    background-size: cover;
+    position: relative;
+    min-height: 500px;
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
 }
