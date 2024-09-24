@@ -8,6 +8,7 @@ const Home = () => {
     // State to track hovered event details
     const [hoveredEvent, setHoveredEvent] = useState(null);
     const [sidebarVisible, setSidebarVisible] = useState(false);
+    const [hoveringMenu, setHoveringMenu] = useState(false); // Track hovering on the event or popup
 
     // Mock events for the calendar
     const events = [
@@ -16,23 +17,40 @@ const Home = () => {
         // Add more events as needed
     ];
 
+    // Function to show sidebar and event details menu
+    const handleMouseEnter = () => {
+        setSidebarVisible(true);
+        setHoveringMenu(true);
+    };
+
+    // Function to hide sidebar and event details menu
+    const handleMouseLeave = () => {
+        setHoveringMenu(false);
+        setTimeout(() => {
+            if (!hoveringMenu) {
+                setSidebarVisible(false);
+                setHoveredEvent(null);
+            }
+        }, 200); // Slight delay to allow for smoother transition between hover states
+    };
+
     return (
         <div className="home-container">
             {/* Floating Icon for Sidebar */}
             <div
                 className="floating-icon"
-                onMouseEnter={() => setSidebarVisible(true)}
-                onMouseLeave={() => setSidebarVisible(false)}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
             >
                 <FaCalendarAlt size={30} />
             </div>
 
             {/* Sidebar showing on hover */}
-            {sidebarVisible && (
+            {(sidebarVisible || hoveringMenu) && (
                 <div
                     className="hover-sidebar"
-                    onMouseEnter={() => setSidebarVisible(true)}
-                    onMouseLeave={() => setSidebarVisible(false)}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
                 >
                     <h2 className="text-xl font-bold mb-4">Events</h2>
                     <div>
@@ -40,7 +58,6 @@ const Home = () => {
                             <div
                                 key={event.id}
                                 onMouseEnter={() => setHoveredEvent(event)}
-                                onMouseLeave={() => setHoveredEvent(null)}
                                 className="event-item"
                             >
                                 <h3 className="text-md font-semibold">{event.title}</h3>
@@ -55,8 +72,8 @@ const Home = () => {
             {hoveredEvent && (
                 <div
                     className="hover-popup"
-                    onMouseEnter={() => setHoveredEvent(hoveredEvent)}
-                    onMouseLeave={() => setHoveredEvent(null)}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
                 >
                     <img src={hoveredEvent.image} alt={hoveredEvent.title} className="w-full h-24 object-cover rounded-lg mb-2" />
                     <h3 className="text-md font-semibold">{hoveredEvent.title}</h3>

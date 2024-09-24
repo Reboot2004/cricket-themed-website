@@ -51,8 +51,7 @@
 
 .main-content {
     flex: 1;
-    margin-left: 100px;
-    /* Leave space for the floating icon */
+    margin-left: 100px; /* Leave space for the floating icon */
 }
 
 .hero-section {
@@ -65,4 +64,8 @@
 .overlay {
     background-color: rgba(0, 0, 0, 0.5);
     height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
