@@ -32,7 +32,29 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+/* App.css */
+.absolute {
+  position: absolute;
+  z-index: 1000;
+}
+
+.bg-blue-600 {
+  background-color: #1e3a8a;
+  /* Tailwind color */
+}
+
+.text-white {
+  color: #ffffff;
+  /* Tailwind color */
+}
+
+.border {
+  border: 1px solid #e5e7eb;
+  /* Tailwind border color */
 }
