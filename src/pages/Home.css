@@ -56,7 +56,7 @@
 }
 
 .hero-section {
-    background-image: url('/path-to-your-image');
+    background-image: url('./asd-transformed.png');
     background-size: cover;
     position: relative;
     min-height: 500px;
