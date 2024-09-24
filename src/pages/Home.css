@@ -1,59 +1,60 @@
-/* src/pages/Home.css */
 .home-container {
     display: flex;
-    height: 100vh;
-    /* Full viewport height */
-    background: url('./asd-transformed.png') no-repeat center center fixed;
-    /* Full background */
-    background-size: cover;
-    /* Cover the entire viewport */
+    min-height: 100vh;
+    flex-direction: column;
 }
 
 .sidebar {
-    width: 25%;
-    background-color: rgba(31, 41, 55, 0.8);
-    /* Semi-transparent background */
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 60px;
+    /* Collapsed width */
+    background-color: #333;
     color: white;
-    padding: 1.5rem;
-}
-
-.event-item {
-    margin-bottom: 1rem;
-    padding: 1rem;
-    background-color: rgba(31, 41, 55, 0.7);
-    /* Semi-transparent item background */
-    border-radius: 0.375rem;
-    /* Rounded corners */
-    transition: background-color 0.3s;
-}
-
-.event-item:hover {
-    background-color: rgba(255, 224, 0, 0.7);
-    /* Change color on hover */
-}
-
-.main-content {
-    width: 75%;
-    overflow-y: auto;
-    /* Enable scrolling if needed */
-}
-
-.hero-section {
-    position: relative;
-    height: 100vh;
-    /* Full height for hero section */
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    transition: width 0.3s ease;
 }
 
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+.sidebar.expanded {
+    width: 300px;
+    /* Expanded width */
+}
+
+.sidebar .sidebar-icon {
+    font-size: 2rem;
+}
+
+.sidebar-content {
+    padding: 20px;
+}
+
+.event-item {
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+.main-content {
+    margin-left: 60px;
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.hero-section {
+    background: url('./asd-transformed.png') no-repeat center center;
+    background-size: cover;
+    height: 400px;
+    position: relative;
+}
+
+.hero-section .overlay {
     background-color: rgba(0, 0, 0, 0.5);
-    /* Dark overlay */
+    height: 100%;
+}
+
+footer {
+    margin-top: auto;
 }

@@ -9,6 +9,7 @@ import './Home.css'; // Import your CSS file for custom styles
 const Home = () => {
     // State to track selected event details
     const [hoveredEvent, setHoveredEvent] = useState(null);
+    const [sidebarHovered, setSidebarHovered] = useState(false); // Track if sidebar is hovered
 
     // Mock events for the calendar
     const events = [
@@ -18,26 +19,34 @@ const Home = () => {
     ];
 
     return (
-        <div className="home-container"> {/* Use a wrapper div with a specific class */}
+        <div className="home-container">
             {/* Sidebar for Calendar */}
-            <div className="sidebar">
-                <h2 className="text-3xl font-bold mb-4 flex items-center">
-                    <FaCalendarAlt className="mr-2" /> Event Calendar
-                </h2>
-                <div className="mt-6">
-                    {/* Display events on the sidebar */}
-                    {events.map(event => (
-                        <div
-                            key={event.id}
-                            onMouseEnter={() => setHoveredEvent(event)}
-                            onMouseLeave={() => setHoveredEvent(null)}
-                            className="event-item"
-                        >
-                            <h3 className="text-xl font-semibold">{event.title}</h3>
-                            <p className="text-sm">{event.date}</p>
+            <div
+                className={`sidebar ${sidebarHovered ? 'expanded' : 'collapsed'}`}
+                onMouseEnter={() => setSidebarHovered(true)}
+                onMouseLeave={() => setSidebarHovered(false)}
+            >
+                <FaCalendarAlt className="sidebar-icon" />
+                {sidebarHovered && (
+                    <div className="sidebar-content">
+                        <h2 className="text-3xl font-bold mb-4 flex items-center">
+                            <FaCalendarAlt className="mr-2" /> Event Calendar
+                        </h2>
+                        <div className="mt-6">
+                            {events.map(event => (
+                                <div
+                                    key={event.id}
+                                    onMouseEnter={() => setHoveredEvent(event)}
+                                    onMouseLeave={() => setHoveredEvent(null)}
+                                    className="event-item"
+                                >
+                                    <h3 className="text-xl font-semibold">{event.title}</h3>
+                                    <p className="text-sm">{event.date}</p>
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
+                    </div>
+                )}
             </div>
 
             {/* Main Content */}
@@ -87,6 +96,13 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Footer */}
+            <footer className="bg-gray-800 text-white py-4 text-center">
+                <p>&copy; 2024 XYZ Cricket Tournaments. All rights reserved.</p>
+                <Link to="/terms" className="text-gray-400 hover:underline">Terms & Conditions</Link>
+                <Link to="/privacy" className="ml-4 text-gray-400 hover:underline">Privacy Policy</Link>
+            </footer>
         </div>
     );
 };
