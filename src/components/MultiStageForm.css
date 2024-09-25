@@ -1,0 +1,68 @@
+/* MultiStageForm.css */
+body,
+html {
+    height: 100%;
+    margin: 0;
+    padding: 1;
+}
+
+.bg-image {
+    /* Use viewport units to cover the full screen */
+    height: 90vh;
+    width: 500vw;
+
+    /* Set background image properties */
+    background-image: url('D:\github\cricket-themed-website\as.png');
+    /* Replace with your image path */
+    background-size: cover;
+    /* Ensures the image covers the full area */
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* Flexbox to center content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    background: rgba(0, 0, 0, 0.8);
+    /* Slightly transparent black background */
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 100%;
+    color: white;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.btn-next,
+.btn-back,
+.btn-submit {
+    background-color: #ff9800;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-next:hover,
+.btn-back:hover,
+.btn-submit:hover {
+    background-color: #e68900;
+}
+
+.error-text {
+    color: red;
+    font-size: 14px;
+}

@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Tournaments from './pages/Tournaments';
 import Registration from './pages/Registration';
-import MultiStageRegistration from './pages/MultiStageForm'; // Import the new multi-stage form
+import MultiStageRegistration from './components/MultiStageForm'; // Import the new multi-stage form
 import Contact from './pages/Contact';
 import EventDetail from './pages/events/EventDetail';
 
@@ -18,10 +18,12 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/tournaments" element={<Tournaments />} />
-        <Route path="/register" element={<Registration />} />
+        <Route path="/register" element={<MultiStageRegistration />} />
         <Route path="/multi-stage-register" element={<MultiStageRegistration />} /> {/* New Route */}
         <Route path="/contact" element={<Contact />} />
         <Route path="/events/:id" element={<EventDetail />} />
+        <Route path="/register/:eventId" component={<MultiStageRegistration />} />
+        <Route path="/event/:eventId" component={<EventDetail />} />
       </Routes>
     </Router>
   );
