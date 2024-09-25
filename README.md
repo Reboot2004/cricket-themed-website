@@ -79,7 +79,7 @@ The project uses CSS for styling, with `App.css` and potentially component-speci
 
 ### Development Setup
 
-1. Clone the repository
+1. Clone the repository: git clone "https://github.com/Reboot2004/cricket-themed-website"
 2. Install dependencies using `npm install`
 3. Run the development server using `npm start`
 
