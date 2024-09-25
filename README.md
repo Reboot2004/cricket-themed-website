@@ -90,6 +90,11 @@ The application can be deployed to various platforms:
 1. Build the project using `npm run build`
 2. Deploy the built files to a static hosting service like Netlify, Vercel, or GitHub Pages
 
+In our case:
+1. I have used Vercel as my choice of hosting service due to its ease of use and easy integration with github.
+2. To deploy on Vercel, commint ur codebase to github, connect the github repo required to the vercel and deploy.
+3. Vercel in the BackGround runs the same `npm run build` command but does it on our behalf.
+
 ## Future Enhancements
 
 Potential areas for future development could include:
